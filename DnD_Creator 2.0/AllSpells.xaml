@@ -1,0 +1,57 @@
+﻿<Window x:Class="DnD_Creator_2._0.AllSpells"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DnD_Creator_2._0"
+        mc:Ignorable="d"
+        Icon="\Img1\icon.ico"
+        Title="Библиотека" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.15*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="findSpell" Text="Поиск" FontSize="18" Margin="10" SelectionChanged="findSpell_SelectionChanged"/>
+
+            <ComboBox x:Name="Lvl" Grid.Column="1" FontSize="16" Margin="5" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem>Все</ComboBoxItem>
+                <ComboBoxItem>0</ComboBoxItem>
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem>5</ComboBoxItem>
+                <ComboBoxItem>6</ComboBoxItem>
+                <ComboBoxItem>7</ComboBoxItem>
+                <ComboBoxItem>8</ComboBoxItem>
+                <ComboBoxItem>9</ComboBoxItem>
+            </ComboBox>
+
+            <ComboBox x:Name="classSP" Grid.Column="2" Margin="5" SelectionChanged="ComboBox_SelectionChanged_1">
+                <ComboBoxItem>Все</ComboBoxItem>
+                <ComboBoxItem>Бард</ComboBoxItem>
+                <ComboBoxItem>Жрец</ComboBoxItem>
+                <ComboBoxItem>Друид</ComboBoxItem>
+                <ComboBoxItem>Чародей</ComboBoxItem>
+                <ComboBoxItem>Колдун</ComboBoxItem>
+                <ComboBoxItem>Волшебник</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="ListSpell"/>
+        </ScrollViewer>
+
+        <Button Grid.Row="2" Content="Назад" Margin="5,5,600,5" Click="Button_Click"/>
+    </Grid>
+</Window>

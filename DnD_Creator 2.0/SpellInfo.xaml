@@ -1,0 +1,33 @@
+﻿<Window x:Class="DnD_Creator_2._0.SpellInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DnD_Creator_2._0"
+        mc:Ignorable="d"
+        Icon="\Img1\icon.ico"
+        Title="Информация о заклинании" Height="450" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="spellName" Text="Название заклинания" FontSize="20" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.8*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="spellScholl" Content="Школа: " FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5"/>
+            <Label x:Name="spellLvl" Grid.Column="1" Content="Круг: " FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="2" Margin="5">
+            <TextBlock x:Name="spellDes" Text="Описание" FontSize="16" TextWrapping="WrapWithOverflow"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

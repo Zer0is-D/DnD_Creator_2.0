@@ -1,0 +1,1387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DnDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Armor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ArmorClass" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Weight" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chosable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="SpecID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Class_description" Type="varchar(max)" Nullable="false" />
+          <Property Name="SkillCount" Type="int" />
+          <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ClassHasMagic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="SpellCount" Type="int" Nullable="false" />
+          <Property Name="Cantrip" Type="int" Nullable="false" />
+          <Property Name="Lvl_1" Type="int" Nullable="false" />
+          <Property Name="HaveFormul" Type="bit" />
+        </EntityType>
+        <EntityType Name="ClassItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="WeaponID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Weight" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Origins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descriptions" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="OriginsItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OriginID" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="OriginSkill">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OriginID" Type="int" Nullable="false" />
+          <Property Name="OriginSkill" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RaceParam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaceID" Type="int" Nullable="false" />
+          <Property Name="Param" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bonus" Type="int" Nullable="false" />
+          <Property Name="IsChoosable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Races">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Speed" Type="int" />
+          <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RaceSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaceID" Type="int" Nullable="false" />
+          <Property Name="SkillID" Type="int" Nullable="false" />
+          <Property Name="IsChoosable" Type="bit" />
+        </EntityType>
+        <EntityType Name="RaceSpells">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaceID" Type="int" Nullable="false" />
+          <Property Name="SpellID" Type="int" />
+        </EntityType>
+        <EntityType Name="SkillClass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="SkillID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Spec">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpellClass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="SpellID" Type="int" />
+        </EntityType>
+        <EntityType Name="Spells">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Lvl" Type="int" Nullable="false" />
+          <Property Name="SchoolName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Weapons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Damage" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Weight" Type="float" Nullable="false" />
+          <Property Name="TwoHanded" Type="bit" />
+          <Property Name="Long" Type="bit" />
+          <Property Name="Remote" Type="bit" />
+          <Property Name="Lung" Type="bit" />
+          <Property Name="Throwing" Type="bit" />
+          <Property Name="Special" Type="bit" />
+          <Property Name="Rechargeable" Type="bit" />
+          <Property Name="Heavy" Type="bit" />
+          <Property Name="Universal" Type="bit" />
+          <Property Name="Fencing" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Chosable_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="Chosable" Type="Self.Chosable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Chosable">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassHasMagic_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="ClassHasMagic" Type="Self.ClassHasMagic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassHasMagic">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassItem_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="ClassItem" Type="Self.ClassItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassItem">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassItem_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="ClassItem" Type="Self.ClassItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassItem_Weapons">
+          <End Role="Weapons" Type="Self.Weapons" Multiplicity="1" />
+          <End Role="ClassItem" Type="Self.ClassItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weapons">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassItem">
+              <PropertyRef Name="WeaponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginsItems_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="OriginsItems" Type="Self.OriginsItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OriginsItems">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginsItems_Origins">
+          <End Role="Origins" Type="Self.Origins" Multiplicity="1" />
+          <End Role="OriginsItems" Type="Self.OriginsItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Origins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OriginsItems">
+              <PropertyRef Name="OriginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginSkill_Origins">
+          <End Role="Origins" Type="Self.Origins" Multiplicity="1" />
+          <End Role="OriginSkill" Type="Self.OriginSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Origins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OriginSkill">
+              <PropertyRef Name="OriginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginSkill_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="OriginSkill" Type="Self.OriginSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OriginSkill">
+              <PropertyRef Name="OriginSkill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceParam_Races">
+          <End Role="Races" Type="Self.Races" Multiplicity="1" />
+          <End Role="RaceParam" Type="Self.RaceParam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Races">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceParam">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceSkills_Races">
+          <End Role="Races" Type="Self.Races" Multiplicity="1" />
+          <End Role="RaceSkills" Type="Self.RaceSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Races">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceSkills">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceSkills_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="RaceSkills" Type="Self.RaceSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceSkills">
+              <PropertyRef Name="SkillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceSpells_Races">
+          <End Role="Races" Type="Self.Races" Multiplicity="1" />
+          <End Role="RaceSpells" Type="Self.RaceSpells" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Races">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceSpells">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceSpells_Spells">
+          <End Role="Spells" Type="Self.Spells" Multiplicity="0..1" />
+          <End Role="RaceSpells" Type="Self.RaceSpells" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spells">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceSpells">
+              <PropertyRef Name="SpellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkillClass_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="SkillClass" Type="Self.SkillClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SkillClass">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkillClass_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="SkillClass" Type="Self.SkillClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SkillClass">
+              <PropertyRef Name="SkillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpellClass_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="0..1" />
+          <End Role="SpellClass" Type="Self.SpellClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SpellClass">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpellClass_Spells">
+          <End Role="Spells" Type="Self.Spells" Multiplicity="0..1" />
+          <End Role="SpellClass" Type="Self.SpellClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spells">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SpellClass">
+              <PropertyRef Name="SpellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище DnDModelContainer">
+          <EntitySet Name="Armor" EntityType="Self.Armor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chosable" EntityType="Self.Chosable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassHasMagic" EntityType="Self.ClassHasMagic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassItem" EntityType="Self.ClassItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Origins" EntityType="Self.Origins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OriginsItems" EntityType="Self.OriginsItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OriginSkill" EntityType="Self.OriginSkill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RaceParam" EntityType="Self.RaceParam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Races" EntityType="Self.Races" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RaceSkills" EntityType="Self.RaceSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RaceSpells" EntityType="Self.RaceSpells" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SkillClass" EntityType="Self.SkillClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spec" EntityType="Self.Spec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpellClass" EntityType="Self.SpellClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spells" EntityType="Self.Spells" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Weapons" EntityType="Self.Weapons" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Chosable_Classes" Association="Self.FK_Chosable_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Chosable" EntitySet="Chosable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassHasMagic_Classes" Association="Self.FK_ClassHasMagic_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ClassHasMagic" EntitySet="ClassHasMagic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassItem_Classes" Association="Self.FK_ClassItem_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ClassItem" EntitySet="ClassItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassItem_Items" Association="Self.FK_ClassItem_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="ClassItem" EntitySet="ClassItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassItem_Weapons" Association="Self.FK_ClassItem_Weapons">
+            <End Role="Weapons" EntitySet="Weapons" />
+            <End Role="ClassItem" EntitySet="ClassItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginsItems_Items" Association="Self.FK_OriginsItems_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="OriginsItems" EntitySet="OriginsItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginsItems_Origins" Association="Self.FK_OriginsItems_Origins">
+            <End Role="Origins" EntitySet="Origins" />
+            <End Role="OriginsItems" EntitySet="OriginsItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginSkill_Origins" Association="Self.FK_OriginSkill_Origins">
+            <End Role="Origins" EntitySet="Origins" />
+            <End Role="OriginSkill" EntitySet="OriginSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginSkill_Skills" Association="Self.FK_OriginSkill_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="OriginSkill" EntitySet="OriginSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceParam_Races" Association="Self.FK_RaceParam_Races">
+            <End Role="Races" EntitySet="Races" />
+            <End Role="RaceParam" EntitySet="RaceParam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceSkills_Races" Association="Self.FK_RaceSkills_Races">
+            <End Role="Races" EntitySet="Races" />
+            <End Role="RaceSkills" EntitySet="RaceSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceSkills_Skills" Association="Self.FK_RaceSkills_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="RaceSkills" EntitySet="RaceSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceSpells_Races" Association="Self.FK_RaceSpells_Races">
+            <End Role="Races" EntitySet="Races" />
+            <End Role="RaceSpells" EntitySet="RaceSpells" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceSpells_Spells" Association="Self.FK_RaceSpells_Spells">
+            <End Role="Spells" EntitySet="Spells" />
+            <End Role="RaceSpells" EntitySet="RaceSpells" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkillClass_Classes" Association="Self.FK_SkillClass_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="SkillClass" EntitySet="SkillClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkillClass_Skills" Association="Self.FK_SkillClass_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="SkillClass" EntitySet="SkillClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpellClass_Classes" Association="Self.FK_SpellClass_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="SpellClass" EntitySet="SpellClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpellClass_Spells" Association="Self.FK_SpellClass_Spells">
+            <End Role="Spells" EntitySet="Spells" />
+            <End Role="SpellClass" EntitySet="SpellClass" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DnDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Armor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ArmorClass" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chosable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="SpecID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_Chosable_Classes" FromRole="Chosable" ToRole="Classes" />
+        </EntityType>
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Class_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SkillCount" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Chosable" Relationship="Self.FK_Chosable_Classes" FromRole="Classes" ToRole="Chosable" />
+          <NavigationProperty Name="ClassHasMagic" Relationship="Self.FK_ClassHasMagic_Classes" FromRole="Classes" ToRole="ClassHasMagic" />
+          <NavigationProperty Name="ClassItem" Relationship="Self.FK_ClassItem_Classes" FromRole="Classes" ToRole="ClassItem" />
+          <NavigationProperty Name="SkillClass" Relationship="Self.FK_SkillClass_Classes" FromRole="Classes" ToRole="SkillClass" />
+          <NavigationProperty Name="SpellClass" Relationship="Self.FK_SpellClass_Classes" FromRole="Classes" ToRole="SpellClass" />
+        </EntityType>
+        <EntityType Name="ClassHasMagic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="SpellCount" Type="Int32" Nullable="false" />
+          <Property Name="Cantrip" Type="Int32" Nullable="false" />
+          <Property Name="Lvl_1" Type="Int32" Nullable="false" />
+          <Property Name="HaveFormul" Type="Boolean" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_ClassHasMagic_Classes" FromRole="ClassHasMagic" ToRole="Classes" />
+        </EntityType>
+        <EntityType Name="ClassItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="WeaponID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_ClassItem_Classes" FromRole="ClassItem" ToRole="Classes" />
+          <NavigationProperty Name="Items" Relationship="Self.FK_ClassItem_Items" FromRole="ClassItem" ToRole="Items" />
+          <NavigationProperty Name="Weapons" Relationship="Self.FK_ClassItem_Weapons" FromRole="ClassItem" ToRole="Weapons" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ClassItem" Relationship="Self.FK_ClassItem_Items" FromRole="Items" ToRole="ClassItem" />
+          <NavigationProperty Name="OriginsItems" Relationship="Self.FK_OriginsItems_Items" FromRole="Items" ToRole="OriginsItems" />
+        </EntityType>
+        <EntityType Name="Origins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OriginsItems" Relationship="Self.FK_OriginsItems_Origins" FromRole="Origins" ToRole="OriginsItems" />
+          <NavigationProperty Name="OriginSkill" Relationship="Self.FK_OriginSkill_Origins" FromRole="Origins" ToRole="OriginSkill" />
+        </EntityType>
+        <EntityType Name="OriginsItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OriginID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Items" Relationship="Self.FK_OriginsItems_Items" FromRole="OriginsItems" ToRole="Items" />
+          <NavigationProperty Name="Origins" Relationship="Self.FK_OriginsItems_Origins" FromRole="OriginsItems" ToRole="Origins" />
+        </EntityType>
+        <EntityType Name="OriginSkill">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OriginID" Type="Int32" Nullable="false" />
+          <Property Name="OriginSkill1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Origins" Relationship="Self.FK_OriginSkill_Origins" FromRole="OriginSkill" ToRole="Origins" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK_OriginSkill_Skills" FromRole="OriginSkill" ToRole="Skills" />
+        </EntityType>
+        <EntityType Name="RaceParam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaceID" Type="Int32" Nullable="false" />
+          <Property Name="Param" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bonus" Type="Int32" Nullable="false" />
+          <Property Name="IsChoosable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Races" Relationship="Self.FK_RaceParam_Races" FromRole="RaceParam" ToRole="Races" />
+        </EntityType>
+        <EntityType Name="Races">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Speed" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RaceParam" Relationship="Self.FK_RaceParam_Races" FromRole="Races" ToRole="RaceParam" />
+          <NavigationProperty Name="RaceSkills" Relationship="Self.FK_RaceSkills_Races" FromRole="Races" ToRole="RaceSkills" />
+          <NavigationProperty Name="RaceSpells" Relationship="Self.FK_RaceSpells_Races" FromRole="Races" ToRole="RaceSpells" />
+        </EntityType>
+        <EntityType Name="RaceSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaceID" Type="Int32" Nullable="false" />
+          <Property Name="SkillID" Type="Int32" Nullable="false" />
+          <Property Name="IsChoosable" Type="Boolean" />
+          <NavigationProperty Name="Races" Relationship="Self.FK_RaceSkills_Races" FromRole="RaceSkills" ToRole="Races" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK_RaceSkills_Skills" FromRole="RaceSkills" ToRole="Skills" />
+        </EntityType>
+        <EntityType Name="RaceSpells">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaceID" Type="Int32" Nullable="false" />
+          <Property Name="SpellID" Type="Int32" />
+          <NavigationProperty Name="Races" Relationship="Self.FK_RaceSpells_Races" FromRole="RaceSpells" ToRole="Races" />
+          <NavigationProperty Name="Spells" Relationship="Self.FK_RaceSpells_Spells" FromRole="RaceSpells" ToRole="Spells" />
+        </EntityType>
+        <EntityType Name="SkillClass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="SkillID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_SkillClass_Classes" FromRole="SkillClass" ToRole="Classes" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK_SkillClass_Skills" FromRole="SkillClass" ToRole="Skills" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OriginSkill" Relationship="Self.FK_OriginSkill_Skills" FromRole="Skills" ToRole="OriginSkill" />
+          <NavigationProperty Name="RaceSkills" Relationship="Self.FK_RaceSkills_Skills" FromRole="Skills" ToRole="RaceSkills" />
+          <NavigationProperty Name="SkillClass" Relationship="Self.FK_SkillClass_Skills" FromRole="Skills" ToRole="SkillClass" />
+        </EntityType>
+        <EntityType Name="Spec">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpellClass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="SpellID" Type="Int32" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_SpellClass_Classes" FromRole="SpellClass" ToRole="Classes" />
+          <NavigationProperty Name="Spells" Relationship="Self.FK_SpellClass_Spells" FromRole="SpellClass" ToRole="Spells" />
+        </EntityType>
+        <EntityType Name="Spells">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lvl" Type="Int32" Nullable="false" />
+          <Property Name="SchoolName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="RaceSpells" Relationship="Self.FK_RaceSpells_Spells" FromRole="Spells" ToRole="RaceSpells" />
+          <NavigationProperty Name="SpellClass" Relationship="Self.FK_SpellClass_Spells" FromRole="Spells" ToRole="SpellClass" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Weapons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Damage" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
+          <Property Name="TwoHanded" Type="Boolean" />
+          <Property Name="Long" Type="Boolean" />
+          <Property Name="Remote" Type="Boolean" />
+          <Property Name="Lung" Type="Boolean" />
+          <Property Name="Throwing" Type="Boolean" />
+          <Property Name="Special" Type="Boolean" />
+          <Property Name="Rechargeable" Type="Boolean" />
+          <Property Name="Heavy" Type="Boolean" />
+          <Property Name="Universal" Type="Boolean" />
+          <Property Name="Fencing" Type="Boolean" />
+          <NavigationProperty Name="ClassItem" Relationship="Self.FK_ClassItem_Weapons" FromRole="Weapons" ToRole="ClassItem" />
+        </EntityType>
+        <Association Name="FK_Chosable_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="Chosable" Type="Self.Chosable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Chosable">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassHasMagic_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="ClassHasMagic" Type="Self.ClassHasMagic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassHasMagic">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassItem_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="ClassItem" Type="Self.ClassItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassItem">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkillClass_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="SkillClass" Type="Self.SkillClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SkillClass">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpellClass_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="0..1" />
+          <End Role="SpellClass" Type="Self.SpellClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SpellClass">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassItem_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="ClassItem" Type="Self.ClassItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassItem_Weapons">
+          <End Role="Weapons" Type="Self.Weapons" Multiplicity="1" />
+          <End Role="ClassItem" Type="Self.ClassItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weapons">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassItem">
+              <PropertyRef Name="WeaponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginsItems_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="OriginsItems" Type="Self.OriginsItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OriginsItems">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginsItems_Origins">
+          <End Role="Origins" Type="Self.Origins" Multiplicity="1" />
+          <End Role="OriginsItems" Type="Self.OriginsItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Origins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OriginsItems">
+              <PropertyRef Name="OriginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginSkill_Origins">
+          <End Role="Origins" Type="Self.Origins" Multiplicity="1" />
+          <End Role="OriginSkill" Type="Self.OriginSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Origins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OriginSkill">
+              <PropertyRef Name="OriginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginSkill_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="OriginSkill" Type="Self.OriginSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OriginSkill">
+              <PropertyRef Name="OriginSkill1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceParam_Races">
+          <End Role="Races" Type="Self.Races" Multiplicity="1" />
+          <End Role="RaceParam" Type="Self.RaceParam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Races">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceParam">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceSkills_Races">
+          <End Role="Races" Type="Self.Races" Multiplicity="1" />
+          <End Role="RaceSkills" Type="Self.RaceSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Races">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceSkills">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceSpells_Races">
+          <End Role="Races" Type="Self.Races" Multiplicity="1" />
+          <End Role="RaceSpells" Type="Self.RaceSpells" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Races">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceSpells">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceSkills_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="RaceSkills" Type="Self.RaceSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceSkills">
+              <PropertyRef Name="SkillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceSpells_Spells">
+          <End Role="Spells" Type="Self.Spells" Multiplicity="0..1" />
+          <End Role="RaceSpells" Type="Self.RaceSpells" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spells">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceSpells">
+              <PropertyRef Name="SpellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkillClass_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="SkillClass" Type="Self.SkillClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SkillClass">
+              <PropertyRef Name="SkillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpellClass_Spells">
+          <End Role="Spells" Type="Self.Spells" Multiplicity="0..1" />
+          <End Role="SpellClass" Type="Self.SpellClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spells">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SpellClass">
+              <PropertyRef Name="SpellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DnDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Armor" EntityType="Self.Armor" />
+          <EntitySet Name="Chosable" EntityType="Self.Chosable" />
+          <EntitySet Name="Classes" EntityType="Self.Classes" />
+          <EntitySet Name="ClassHasMagic" EntityType="Self.ClassHasMagic" />
+          <EntitySet Name="ClassItem" EntityType="Self.ClassItem" />
+          <EntitySet Name="Items" EntityType="Self.Items" />
+          <EntitySet Name="Origins" EntityType="Self.Origins" />
+          <EntitySet Name="OriginsItems" EntityType="Self.OriginsItems" />
+          <EntitySet Name="OriginSkill" EntityType="Self.OriginSkill" />
+          <EntitySet Name="RaceParam" EntityType="Self.RaceParam" />
+          <EntitySet Name="Races" EntityType="Self.Races" />
+          <EntitySet Name="RaceSkills" EntityType="Self.RaceSkills" />
+          <EntitySet Name="RaceSpells" EntityType="Self.RaceSpells" />
+          <EntitySet Name="SkillClass" EntityType="Self.SkillClass" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" />
+          <EntitySet Name="Spec" EntityType="Self.Spec" />
+          <EntitySet Name="SpellClass" EntityType="Self.SpellClass" />
+          <EntitySet Name="Spells" EntityType="Self.Spells" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Weapons" EntityType="Self.Weapons" />
+          <AssociationSet Name="FK_Chosable_Classes" Association="Self.FK_Chosable_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Chosable" EntitySet="Chosable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassHasMagic_Classes" Association="Self.FK_ClassHasMagic_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ClassHasMagic" EntitySet="ClassHasMagic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassItem_Classes" Association="Self.FK_ClassItem_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ClassItem" EntitySet="ClassItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkillClass_Classes" Association="Self.FK_SkillClass_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="SkillClass" EntitySet="SkillClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpellClass_Classes" Association="Self.FK_SpellClass_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="SpellClass" EntitySet="SpellClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassItem_Items" Association="Self.FK_ClassItem_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="ClassItem" EntitySet="ClassItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassItem_Weapons" Association="Self.FK_ClassItem_Weapons">
+            <End Role="Weapons" EntitySet="Weapons" />
+            <End Role="ClassItem" EntitySet="ClassItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginsItems_Items" Association="Self.FK_OriginsItems_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="OriginsItems" EntitySet="OriginsItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginsItems_Origins" Association="Self.FK_OriginsItems_Origins">
+            <End Role="Origins" EntitySet="Origins" />
+            <End Role="OriginsItems" EntitySet="OriginsItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginSkill_Origins" Association="Self.FK_OriginSkill_Origins">
+            <End Role="Origins" EntitySet="Origins" />
+            <End Role="OriginSkill" EntitySet="OriginSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginSkill_Skills" Association="Self.FK_OriginSkill_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="OriginSkill" EntitySet="OriginSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceParam_Races" Association="Self.FK_RaceParam_Races">
+            <End Role="Races" EntitySet="Races" />
+            <End Role="RaceParam" EntitySet="RaceParam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceSkills_Races" Association="Self.FK_RaceSkills_Races">
+            <End Role="Races" EntitySet="Races" />
+            <End Role="RaceSkills" EntitySet="RaceSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceSpells_Races" Association="Self.FK_RaceSpells_Races">
+            <End Role="Races" EntitySet="Races" />
+            <End Role="RaceSpells" EntitySet="RaceSpells" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceSkills_Skills" Association="Self.FK_RaceSkills_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="RaceSkills" EntitySet="RaceSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceSpells_Spells" Association="Self.FK_RaceSpells_Spells">
+            <End Role="Spells" EntitySet="Spells" />
+            <End Role="RaceSpells" EntitySet="RaceSpells" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkillClass_Skills" Association="Self.FK_SkillClass_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="SkillClass" EntitySet="SkillClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpellClass_Spells" Association="Self.FK_SpellClass_Spells">
+            <End Role="Spells" EntitySet="Spells" />
+            <End Role="SpellClass" EntitySet="SpellClass" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DnDModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DnDModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DnDModelContainer" CdmEntityContainer="DnDEntities">
+          <EntitySetMapping Name="Armor">
+            <EntityTypeMapping TypeName="DnDModel.Armor">
+              <MappingFragment StoreEntitySet="Armor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ArmorClass" ColumnName="ArmorClass" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chosable">
+            <EntityTypeMapping TypeName="DnDModel.Chosable">
+              <MappingFragment StoreEntitySet="Chosable">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="SpecID" ColumnName="SpecID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="DnDModel.Classes">
+              <MappingFragment StoreEntitySet="Classes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Class_name" ColumnName="Class_name" />
+                <ScalarProperty Name="Class_description" ColumnName="Class_description" />
+                <ScalarProperty Name="SkillCount" ColumnName="SkillCount" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassHasMagic">
+            <EntityTypeMapping TypeName="DnDModel.ClassHasMagic">
+              <MappingFragment StoreEntitySet="ClassHasMagic">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="SpellCount" ColumnName="SpellCount" />
+                <ScalarProperty Name="Cantrip" ColumnName="Cantrip" />
+                <ScalarProperty Name="Lvl_1" ColumnName="Lvl_1" />
+                <ScalarProperty Name="HaveFormul" ColumnName="HaveFormul" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassItem">
+            <EntityTypeMapping TypeName="DnDModel.ClassItem">
+              <MappingFragment StoreEntitySet="ClassItem">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="WeaponID" ColumnName="WeaponID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="DnDModel.Items">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Origins">
+            <EntityTypeMapping TypeName="DnDModel.Origins">
+              <MappingFragment StoreEntitySet="Origins">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OriginsItems">
+            <EntityTypeMapping TypeName="DnDModel.OriginsItems">
+              <MappingFragment StoreEntitySet="OriginsItems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OriginID" ColumnName="OriginID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OriginSkill">
+            <EntityTypeMapping TypeName="DnDModel.OriginSkill">
+              <MappingFragment StoreEntitySet="OriginSkill">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OriginID" ColumnName="OriginID" />
+                <ScalarProperty Name="OriginSkill1" ColumnName="OriginSkill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RaceParam">
+            <EntityTypeMapping TypeName="DnDModel.RaceParam">
+              <MappingFragment StoreEntitySet="RaceParam">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="Param" ColumnName="Param" />
+                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+                <ScalarProperty Name="IsChoosable" ColumnName="IsChoosable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Races">
+            <EntityTypeMapping TypeName="DnDModel.Races">
+              <MappingFragment StoreEntitySet="Races">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RaceSkills">
+            <EntityTypeMapping TypeName="DnDModel.RaceSkills">
+              <MappingFragment StoreEntitySet="RaceSkills">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+                <ScalarProperty Name="IsChoosable" ColumnName="IsChoosable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RaceSpells">
+            <EntityTypeMapping TypeName="DnDModel.RaceSpells">
+              <MappingFragment StoreEntitySet="RaceSpells">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="SpellID" ColumnName="SpellID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkillClass">
+            <EntityTypeMapping TypeName="DnDModel.SkillClass">
+              <MappingFragment StoreEntitySet="SkillClass">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="DnDModel.Skills">
+              <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spec">
+            <EntityTypeMapping TypeName="DnDModel.Spec">
+              <MappingFragment StoreEntitySet="Spec">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpellClass">
+            <EntityTypeMapping TypeName="DnDModel.SpellClass">
+              <MappingFragment StoreEntitySet="SpellClass">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="SpellID" ColumnName="SpellID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spells">
+            <EntityTypeMapping TypeName="DnDModel.Spells">
+              <MappingFragment StoreEntitySet="Spells">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lvl" ColumnName="Lvl" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DnDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weapons">
+            <EntityTypeMapping TypeName="DnDModel.Weapons">
+              <MappingFragment StoreEntitySet="Weapons">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Damage" ColumnName="Damage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="TwoHanded" ColumnName="TwoHanded" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Remote" ColumnName="Remote" />
+                <ScalarProperty Name="Lung" ColumnName="Lung" />
+                <ScalarProperty Name="Throwing" ColumnName="Throwing" />
+                <ScalarProperty Name="Special" ColumnName="Special" />
+                <ScalarProperty Name="Rechargeable" ColumnName="Rechargeable" />
+                <ScalarProperty Name="Heavy" ColumnName="Heavy" />
+                <ScalarProperty Name="Universal" ColumnName="Universal" />
+                <ScalarProperty Name="Fencing" ColumnName="Fencing" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище DnDModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище DnDModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище DnDModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище DnDModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DnDModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище DnDModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DnDModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище DnDModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище DnDModel.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

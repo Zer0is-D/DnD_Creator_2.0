@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="35aca3a03a9943908c4ea9a726255b1b" Name="Diagram1">
+        <EntityTypeShape EntityType="DnDModel.Armor" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.Chosable" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.Classes" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.ClassHasMagic" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.ClassItem" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.Items" Width="1.5" PointX="3.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.Origins" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.OriginsItems" Width="1.5" PointX="9" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.OriginSkill" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.RaceParam" Width="1.5" PointX="11" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.Races" Width="1.5" PointX="8.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.RaceSkills" Width="1.5" PointX="11" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.RaceSpells" Width="1.5" PointX="11" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.SkillClass" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.Skills" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.Spec" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.SpellClass" Width="1.5" PointX="6" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.Spells" Width="1.5" PointX="3.75" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.sysdiagrams" Width="1.5" PointX="11.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DnDModel.Weapons" Width="1.5" PointX="3.75" PointY="16.125" IsExpanded="true" />
+        <AssociationConnector Association="DnDModel.FK_Chosable_Classes" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_ClassHasMagic_Classes" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_ClassItem_Classes" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_SkillClass_Classes" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_SpellClass_Classes" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_ClassItem_Items" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_ClassItem_Weapons" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_OriginsItems_Items" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_OriginsItems_Origins" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_OriginSkill_Origins" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_OriginSkill_Skills" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_RaceParam_Races" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_RaceSkills_Races" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_RaceSpells_Races" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_RaceSkills_Skills" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_RaceSpells_Spells" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_SkillClass_Skills" ManuallyRouted="false" />
+        <AssociationConnector Association="DnDModel.FK_SpellClass_Spells" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
